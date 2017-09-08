@@ -1,0 +1,110 @@
+Zicheng Huang
+STAT243 PS1
+09/08/2017
+
+
+
+# 2(a)
+
+# download the file and give it the name "ApricotData.zip"
+wget -O ApricotData.zip "http://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=itemCode:526&DataMartId=FAO&Format=csv&c=2,3,4,5,6,7&s=countryName:asc,elementCode:asc,year:desc"
+
+
+# unzip the ZIP file and give the extracted CSV file the name "ApricotData.csv"
+unzip -p ApricotData.zip > ApricotData.csv
+
+
+# extract the data for regions of the world into a new file called "ApricotData_Regions.csv"
+grep "+" ApricotData.csv > ApricotData_Regions.csv
+
+
+# extract the data for individual countries into a new file called "ApricotData_Countries.csv"
+grep -v "+" ApricotData.csv > ApricotData_Countries.csv
+
+
+# subset the country-level data to the year 2005 and save the resulting 
+# data into a new file called "ApricotData_Countries2005.csv"
+grep "\"2005\"" ApricotData_Countries.csv > ApricotData_Countries2005.csv
+
+
+# select all the lines with element "Area Harvested", switch the commas in
+# country names to underscores, switch the delimiter from comma to semicolon,
+# switch the underscores in country names back to commas, remove all the double
+# quotes; cut to keep the first coloum and the sixth column, then sort the
+# second column which contains the value, and display the top five countries
+# with largest land use
+grep "Area Harvested" ApricotData_Countries2005.csv | sed 's/, /_/g' | sed 's/,/;/g' | sed 's/_/, /g' | sed 's/\"//g' | cut -d';' -f 1,6 | sort -r -n -t';' -k 2 | head -n 5
+
+
+# apply the above analysis to the year 1965, 1975, 1985, 1995, 2005 to see
+# the top five countries in land use for production of apricots 
+# for each year value ${i} in 1965, 1975, 1985, 1995, 2005
+	# print the message displaying which year of land use ranking it is,
+	# and then follow tha above analysis except first subset the original
+	# data for individual countries based on the year value ${i}
+	
+for i in {1965..2005..10}
+do 
+	echo -e "Top five countries in land use for apricots production in ${i}:\n$(grep "\"${i}\"" ApricotData_Countries.csv | grep "Area Harvested" | sed 's/, /_/g' | sed 's/,/;/g' | sed 's/_/, /g' | sed 's/\"//g' | cut -d';' -f 1,6 | sort -r -n -t';' -k 2 | head -n 5)\n"
+done
+
+
+
+#2(b)
+
+# define a function calledc "myfunc"
+	# if user inputs more than one argument
+		# then display error message
+	# if user inputs "myfunc -h"
+		# display help information
+	# if user inputs one argument
+		# download the corresponding ZIP file which contains
+		# the CSV file based on the item code provided
+		# unzip the ZIP file and give it a name based on the item code ${i}
+		# print out the first 10 lines of the data stored in the CSV file
+
+function myfun() {
+	if [ $# != 1 ]
+	then
+		echo "Wrong number of inputs arguments. This function takes as input a single item code."
+	elif [ $1 == '-h' ]
+	then
+		echo "This function takes as input ONE single item code and prints out to the screen the data stored in the corresponding CSV file, such that the information could be piped on to UNIX another operation."
+	else
+		wget -O Data$1.zip "http://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=itemCode:$1&DataMartId=FAO&Format=csv&c=2,3,4,5,6,7&s=countryName:asc,elementCode:asc,year:desc"
+		unzip -p Data$1.zip > Data$1.csv
+		less Data$1.csv
+	fi
+}
+
+
+
+#3
+
+# download the HTML file from the URL link
+# and the HTML file id called by default "index.html"
+
+wget "https://www1.ncdc.noaa.gov/pub/data/ghcn/daily/"
+
+
+# return only the content matching the pattern that any
+# number of characters before ".txt" from the relevant lines,
+# remove all characters before and after the file names,
+# then create a variable called "filenames" which contains 
+# all the filenames extracted from the HTML file index.html
+
+filenames=$(grep -o '.*\.txt\">' index.html | sed 's/.*href=\"//g' | sed 's/\">//g')
+
+
+# create a for loop, each each of the filename in the
+# "filenames" variable, first display a staus message
+# telling the user which TXT file is downloading, 
+# and then download the corresponding TXT file by
+# appending the filename ${i} to the end of the URL 
+# provided, run this process for each of the filenames
+
+for i in ${filenames}
+do
+	echo "You are now downloading the file \"${i}\""
+	wget "https://www1.ncdc.noaa.gov/pub/data/ghcn/daily/${i}"
+done

@@ -1,0 +1,19 @@
+\documentclass{article}
+\usepackage{geometry}
+\geometry{tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+
+<<setup, include=FALSE>>=
+library(knitr)
+@
+
+\begin{document}
+
+\noindent The height of the water level in Lake Huron fluctuates over time. Here I 'analyze' the variation using R. I show a histogram of the lake levels for the period \Sexpr{tsp(LakeHuron)[1]} to \Sexpr{tsp(LakeHuron)[2]}.
+
+<<fig.width=3, fig.height=4>>=
+hist(LakeHuron)
+lowHi <- c(which.min(LakeHuron), which.max(LakeHuron))
+yearExtrema <- attributes(LakeHuron)$tsp[1]-1 + lowHi
+@
+
+\end{document}
