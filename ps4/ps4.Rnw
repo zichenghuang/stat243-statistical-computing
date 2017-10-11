@@ -301,23 +301,23 @@ df <- data.frame(xLength = n, PIKKtime = timePIKK,
 df
 @
 \newpage
-\noindent Plot the comparison of the PIKK algorithm as follows. Line on top is original algorithm, line on bottom is the modified algorithm. 
-<<fig.width=6, fig.height=4>>=
+\noindent Plot the comparison of the PIKK algorithm as follows. Line on top is original algorithm, line on bottom is the modified algorithm. The size of $k$ is always $\frac{n}{20}$.
+<<fig.width=6, fig.height=6>>=
 # plot comparison for first algorithm
 g1 <- ggplot(df) + 
-  geom_line(aes(x = xLength, y = PIKKtime)) +
-  geom_line(aes(x = xLength, y = modPIKKtime)) +
+  geom_line(aes(x = xLength, y = PIKKtime, lty = "Original")) +
+  geom_line(aes(x = xLength, y = modPIKKtime, lty = "Modified")) +
   xlab("different length of x") + 
   ylab("nanoseconds")
 g1
 @
 \newpage
-\noindent Plot the comparison of the FYKD algorithm as follows. Line on top is original algorithm, line on bottom is the modified algorithm. 
-<<fig.width=6, fig.height=4>>=
+\noindent Plot the comparison of the FYKD algorithm as follows. Line on top is original algorithm, line on bottom is the modified algorithm. The size of $k$ is always $\frac{n}{20}$.
+<<fig.width=6, fig.height=6>>=
 # plot comparison for second algorithm
 g2 <- ggplot(df) + 
-  geom_line(aes(x = xLength, y = FYKDtime)) +
-  geom_line(aes(x = xLength, y = modFYKDtime)) +
+  geom_line(aes(x = xLength, y = FYKDtime, lty = "Original")) +
+  geom_line(aes(x = xLength, y = modFYKDtime, lty = "Modified")) +
   xlab("different length of x") + 
   ylab("nanoseconds")
 g2
