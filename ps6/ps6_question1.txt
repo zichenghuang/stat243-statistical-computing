@@ -1,0 +1,24 @@
+Zicheng Huang
+PS6 Question1
+
+1. 
+The goal of the stimulation study is to investigate the finite sample properties of the likelihood ratio test in determining the mixture distribution, more specifically, a k0-component normal mixture versus a k1-component normal mixture. 
+The metrics being considered in assessing the method are the significance level and the statistical power of the likelihood ratio test. 
+
+2. 
+In designing their stimulation study, the authors first need to choose the value of k0 and k1 for the two competing distributions, together with the values of the mixing proportion and the distance between the components of the competing distribution. They also need to determine the different sample sizes under investigation and how many samples should be generated to make the analysis. 
+The size of the samples and the level of separation of the components of the competing distribution are some key aspects of the data generating mechanism that likely affect the statistical power. 
+The data generating mechanism considered in this paper does not consider the scenario where the components of the competing distributions have difference variance. This might be something useful to consider.
+
+3.
+Their tables in general do a good job of presenting the stimulation results by showing the comparison of significance level and statistical power under different sample sizes, mixing proportions, and magnitudes of separation between components. In some cases, a static graphical representation of the results may also be a good choice. However, it might be too complicated to construct a good static graphic when the number of changing variables gets larger. In this case, we might need to implement a dynamic graphical representation of the stimulation results. 
+
+4.
+Table 2 suggests that the statistical power is low for sample size less than 200 where the components of the mixture distribution is not well separated. Under the condition of components being well separated, at least a sample size of 100 is needed to be able to observe a reasonable statistical power. According to the table, we cannot see a relationship between power and the mixing proportion. By observing that the unadjusted test tends to reject the null hypothesis more often does the adjusted test, it is reasonable in that the convergence of the unadjusted test is not as accurate. 
+Table 4 presents similar results, with two sets of mixing proportions, that larger separation between components and larger sample sizes are correlated with a larger power.
+
+
+5.
+The authors may decide to use 1000 stimulations in order to get a better rate of convergence of the test statistic toward the asymptotic distribution so as to have a better representation of the underline population. 
+The stimulation size of 10 is too small to give enough information needed for the distribution and not representative of the population. 
+If more than 1000 stimulations can give better results and convergence, then it might be useful to take more than 1000 stimulations. However, if the implementation of more stimulations does not lead to a better result, instead, only similar level of results, then 1000 stimulations may be enough.
