@@ -1,0 +1,7 @@
+"X1" "X2" "X3" "X4" "X5" "X6"
+"1" "20081129" "210000" "pt" "Barack_Obama" "86" "2032215"
+"2" "20081014" "190000" "en" "Special:AllPages/I_ran_Project_Vote_voter_registration_drive_in_Illinois,_ACORN_was_smack_dab_in_the_middle_of_it,%22_said_Barack_Obama" "2" "25520"
+"3" "20081108" "190000" "no" "Bilde:Barack_Obama_2004.jpg" "1" "7825"
+"4" "20081128" "190001" "en" "Early_life_and_career_of_Barack_Obama" "16" "760462"
+"5" "20081110" "160000" "et" "Barack_Obama" "4" "55875"
+"6" "20081101" "110000" "fr" "Discuter:Barack_Obama" "1" "20922"
